@@ -9,12 +9,12 @@ import java.io.Serializable;
 public class Event implements Serializable {
 
     @Id
-    private Long id;
+    private String id;
     private String eventName;
     private String dateTime;
     private String cep;
 
-    public Event(Long id, String eventName, String dateTime, String cep) {
+    public Event(String id, String eventName, String dateTime, String cep) {
         this.id = id;
         this.eventName = eventName;
         this.dateTime = dateTime;
@@ -24,11 +24,11 @@ public class Event implements Serializable {
     public Event() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
