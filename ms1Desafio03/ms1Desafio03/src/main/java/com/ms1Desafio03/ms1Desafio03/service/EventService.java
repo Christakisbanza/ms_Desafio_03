@@ -46,5 +46,10 @@ public class EventService {
         );
     }
 
+    @Transactional
+    public List<Event> getAll(){
+        return eventRepository.findAll();
+    }
+
 
 }

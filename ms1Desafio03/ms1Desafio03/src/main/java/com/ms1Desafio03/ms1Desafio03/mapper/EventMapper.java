@@ -5,6 +5,8 @@ import com.ms1Desafio03.ms1Desafio03.entity.dto.EventCreateDto;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
 import org.modelmapper.ModelMapper;
 
+import java.util.List;
+
 public class EventMapper {
     public static Event toEvent(EventCreateDto eventCreateDto){
         return new ModelMapper().map(eventCreateDto, Event.class);
@@ -16,6 +18,10 @@ public class EventMapper {
 
     public static EventResponseDto toDto(Event post){
         return new ModelMapper().map(post, EventResponseDto.class);
+    }
+
+    public static List<EventResponseDto> toDtos(List<Event> events){
+        return events.stream().map(e -> new ModelMapper().map(e, EventResponseDto.class)).toList();
     }
 
 }

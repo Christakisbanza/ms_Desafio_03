@@ -5,10 +5,14 @@ import com.ms1Desafio03.ms1Desafio03.entity.dto.EventCreateDto;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
 import com.ms1Desafio03.ms1Desafio03.mapper.EventMapper;
 import com.ms1Desafio03.ms1Desafio03.service.EventService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("events/v1")
@@ -27,5 +31,11 @@ public class EventController {
     public ResponseEntity<EventResponseDto> getByid(@PathVariable String id){
         Event event = eventService.getById(id);
         return ResponseEntity.ok().body(EventMapper.toDto(event));
+    }
+
+    @GetMapping("/get-all-events")
+    public ResponseEntity<List<EventResponseDto>> getAll(){
+        List<Event> list = eventService.getAll();
+        return ResponseEntity.ok().body(EventMapper.toDtos(list));
     }
 }
