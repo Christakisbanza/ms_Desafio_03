@@ -27,10 +27,12 @@ public class EventService {
 
         eventRepository.save(event);
 
-        EventResponseDto responseDto = openFeignCep.getCepInfo();
+        EventResponseDto responseDto = openFeignCep.getCepInfo(event.getCep());
 
+        responseDto.setId(event.getId());
         responseDto.setEventName(event.getEventName());
         responseDto.setDateTime(event.getDateTime());
+        responseDto.setCep(event.getCep());
 
         return responseDto;
     }

@@ -15,7 +15,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @PostMapping
+    @PostMapping("/create-event")
     public ResponseEntity<EventResponseDto> save(@RequestBody EventCreateDto eventCreateDto){
         EventResponseDto responseDto = eventService.save(EventMapper.toEvent(eventCreateDto));
         return ResponseEntity.ok().body(responseDto);

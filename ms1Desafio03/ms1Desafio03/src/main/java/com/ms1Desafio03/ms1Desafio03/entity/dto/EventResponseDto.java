@@ -2,34 +2,34 @@ package com.ms1Desafio03.ms1Desafio03.entity.dto;
 
 public class EventResponseDto {
 
-      private Long id;
+      private String id;
       private String eventName;
       private String dateTime;
       private String cep;
       private String logradouro;
       private String bairro;
-      private String cidade;
+      private String localidade;
       private String uf;
 
-    public EventResponseDto(Long id, String eventName, String dateTime, String cep, String logradouro, String bairro, String cidade, String uf) {
+    public EventResponseDto(String id, String eventName, String dateTime, String cep, String logradouro, String bairro, String localidade, String uf) {
         this.id = id;
         this.eventName = eventName;
         this.dateTime = dateTime;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
-        this.cidade = cidade;
+        this.localidade = localidade;
         this.uf = uf;
     }
 
     public EventResponseDto() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -73,12 +73,12 @@ public class EventResponseDto {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setLocalidade(String cidade) {
+        this.localidade = cidade;
     }
 
     public String getUf() {
