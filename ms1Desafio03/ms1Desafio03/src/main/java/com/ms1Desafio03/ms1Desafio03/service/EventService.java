@@ -23,10 +23,7 @@ public class EventService {
 
 
     @Transactional
-    public EventResponseDto save(Event event){
-
-        eventRepository.save(event);
-
+    public Event save(Event event){
         EventResponseDto responseDto = openFeignCep.getCepInfo(event.getCep());
 
         responseDto.setId(event.getId());
@@ -34,7 +31,19 @@ public class EventService {
         responseDto.setDateTime(event.getDateTime());
         responseDto.setCep(event.getCep());
 
-        return responseDto;
+        Event eventSaved = eventRepository.save(EventMapper.toEvent(responseDto));
+
+        responseDto.setId(eventSaved.getId());
+
+        return EventMapper.toEvent(responseDto);
+    }
+
+
+    @Transactional
+    public Event getById(String id){
+        return eventRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("ID not found")
+        );
     }
 
 
