@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
-public class EventMapper {
+public class TicketMapper {
     public static Ticket toTicket(TicketCreatDto ticketCreatDto){
         return new ModelMapper().map(ticketCreatDto, Ticket.class);
     }

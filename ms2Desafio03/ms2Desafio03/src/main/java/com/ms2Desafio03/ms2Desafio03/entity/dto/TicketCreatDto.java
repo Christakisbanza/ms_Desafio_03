@@ -7,17 +7,17 @@ public class TicketCreatDto {
     private String customerMail;
     private String eventId;
     private String eventName;
-    private String BRLamount;
-    private String USDamount;
+    private String brlTotalAmount;
+    private String usdTotalAmount;
 
-    public TicketCreatDto(String customerName, String cpf, String customerMail, String eventId, String eventName, String BRLamount, String USDamount) {
+    public TicketCreatDto(String customerName, String cpf, String customerMail, String eventId, String eventName, String brlTotalAmount, String usdTotalAmount) {
         this.customerName = customerName;
         this.cpf = cpf;
         this.customerMail = customerMail;
         this.eventId = eventId;
         this.eventName = eventName;
-        this.BRLamount = BRLamount;
-        this.USDamount = USDamount;
+        this.brlTotalAmount = brlTotalAmount;
+        this.usdTotalAmount = usdTotalAmount;
     }
 
     public TicketCreatDto() {
@@ -63,19 +63,19 @@ public class TicketCreatDto {
         this.eventName = eventName;
     }
 
-    public String getBRLamount() {
-        return BRLamount;
+    public String getBrlTotalAmount() {
+        return brlTotalAmount;
     }
 
-    public void setBRLamount(String BRLamount) {
-        this.BRLamount = BRLamount;
+    public void setBrlTotalAmount(String brlTotalAmount) {
+        this.brlTotalAmount = brlTotalAmount;
     }
 
-    public String getUSDamount() {
-        return USDamount;
+    public String getUsdTotalAmount() {
+        return usdTotalAmount;
     }
 
-    public void setUSDamount(String USDamount) {
-        this.USDamount = USDamount;
+    public void setUsdTotalAmount(String usdTotalAmount) {
+        this.usdTotalAmount = usdTotalAmount;
     }
 }

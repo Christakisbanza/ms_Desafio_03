@@ -14,18 +14,18 @@ public class Ticket implements Serializable {
     private String customerName;
     private String customerMail;
     private Event event;
-    private String BRLtotalAmount;
-    private String USDtotalAmount;
+    private String brlTotalAmount;
+    private String usdTotalAmount;
     private String status;
 
-    public Ticket(String id, String cpf, String customerName, String customerMail, Event event, String BRLtotalAmount, String USDtotalAmount, String status) {
+    public Ticket(String id, String cpf, String customerName, String customerMail, Event event, String brlTotalAmount, String usdTotalAmount, String status) {
         this.id = id;
         this.cpf = cpf;
         this.customerName = customerName;
         this.customerMail = customerMail;
         this.event = event;
-        this.BRLtotalAmount = BRLtotalAmount;
-        this.USDtotalAmount = USDtotalAmount;
+        this.brlTotalAmount = brlTotalAmount;
+        this.usdTotalAmount = usdTotalAmount;
         this.status = status;
     }
 
@@ -72,20 +72,20 @@ public class Ticket implements Serializable {
         this.event = event;
     }
 
-    public String getBRLtotalAmount() {
-        return BRLtotalAmount;
+    public String getBrlTotalAmount() {
+        return brlTotalAmount;
     }
 
-    public void setBRLtotalAmount(String BRLtotalAmount) {
-        this.BRLtotalAmount = BRLtotalAmount;
+    public void setBrlTotalAmount(String brlTotalAmount) {
+        this.brlTotalAmount = brlTotalAmount;
     }
 
-    public String getUSDtotalAmount() {
-        return USDtotalAmount;
+    public String getUsdTotalAmount() {
+        return usdTotalAmount;
     }
 
-    public void setUSDtotalAmount(String USDtotalAmount) {
-        this.USDtotalAmount = USDtotalAmount;
+    public void setUsdTotalAmount(String usdTotalAmount) {
+        this.usdTotalAmount = usdTotalAmount;
     }
 
     public String getStatus() {
