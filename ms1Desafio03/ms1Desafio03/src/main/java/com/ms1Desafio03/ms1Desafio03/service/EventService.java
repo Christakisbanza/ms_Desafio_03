@@ -51,6 +51,11 @@ public class EventService {
     }
 
     @Transactional
+    public List<Event> getAllAsc(){
+        return eventRepository.findAllByOrderByEventNameAsc();
+    }
+
+    @Transactional
     public Event upDateById(String id, Event event){
         Event eventToUpdate = getById(id);
         EventResponseDto responseDto = openFeignCep.getCepInfo(event.getCep());

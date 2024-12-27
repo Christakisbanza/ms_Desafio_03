@@ -40,6 +40,12 @@ public class EventController {
         return ResponseEntity.ok().body(EventMapper.toDtos(list));
     }
 
+    @GetMapping("/get-all-events/sorted")
+    public ResponseEntity<List<EventResponseDto>> getAllAsc(){
+        List<Event> list = eventService.getAllAsc();
+        return ResponseEntity.ok().body(EventMapper.toDtos(list));
+    }
+
     @PutMapping("/update-event/{id}")
     public ResponseEntity<EventResponseDto> upDateById(@PathVariable String id, @RequestBody EventUpdateDto eventUpdateDto){
         Event event = eventService.upDateById(id, EventMapper.toEvent(eventUpdateDto));
