@@ -25,7 +25,7 @@ public class EventService {
     @Transactional
     public Event save(Event event){
         EventResponseDto responseDto = openFeignCep.getCepInfo(event.getCep());
-        
+
         responseDto.setEventName(event.getEventName());
         responseDto.setDateTime(event.getDateTime());
         responseDto.setCep(event.getCep());
@@ -67,6 +67,11 @@ public class EventService {
         eventRepository.save(eventToUpdate);
 
         return eventToUpdate;
+    }
+
+    @Transactional
+    public void deleteById(String id){
+        eventRepository.deleteById(id);
     }
 
 
