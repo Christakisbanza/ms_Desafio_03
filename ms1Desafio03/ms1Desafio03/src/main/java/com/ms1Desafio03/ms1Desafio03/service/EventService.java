@@ -25,8 +25,7 @@ public class EventService {
     @Transactional
     public Event save(Event event){
         EventResponseDto responseDto = openFeignCep.getCepInfo(event.getCep());
-
-        responseDto.setId(event.getId());
+        
         responseDto.setEventName(event.getEventName());
         responseDto.setDateTime(event.getDateTime());
         responseDto.setCep(event.getCep());
@@ -49,6 +48,25 @@ public class EventService {
     @Transactional
     public List<Event> getAll(){
         return eventRepository.findAll();
+    }
+
+    @Transactional
+    public Event upDateById(String id, Event event){
+        Event eventToUpdate = getById(id);
+        EventResponseDto responseDto = openFeignCep.getCepInfo(event.getCep());
+
+        eventToUpdate.setEventName(event.getEventName());
+        eventToUpdate.setDateTime(event.getDateTime());
+        eventToUpdate.setCep(event.getCep());
+
+        eventToUpdate.setLogradouro(responseDto.getLogradouro());
+        eventToUpdate.setBairro(responseDto.getBairro());
+        eventToUpdate.setLocalidade(responseDto.getLocalidade());
+        eventToUpdate.setUf(responseDto.getUf());
+
+        eventRepository.save(eventToUpdate);
+
+        return eventToUpdate;
     }
 
 

@@ -3,6 +3,7 @@ package com.ms1Desafio03.ms1Desafio03.controller;
 import com.ms1Desafio03.ms1Desafio03.entity.Event;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventCreateDto;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
+import com.ms1Desafio03.ms1Desafio03.entity.dto.EventUpdateDto;
 import com.ms1Desafio03.ms1Desafio03.mapper.EventMapper;
 import com.ms1Desafio03.ms1Desafio03.service.EventService;
 import org.modelmapper.ModelMapper;
@@ -37,5 +38,11 @@ public class EventController {
     public ResponseEntity<List<EventResponseDto>> getAll(){
         List<Event> list = eventService.getAll();
         return ResponseEntity.ok().body(EventMapper.toDtos(list));
+    }
+
+    @PutMapping("/update-event/{id}")
+    public ResponseEntity<EventResponseDto> upDateById(@PathVariable String id, @RequestBody EventUpdateDto eventUpdateDto){
+        Event event = eventService.upDateById(id, EventMapper.toEvent(eventUpdateDto));
+        return ResponseEntity.ok().body(EventMapper.toDto(event));
     }
 }
