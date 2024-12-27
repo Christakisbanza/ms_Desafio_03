@@ -2,6 +2,7 @@ package com.ms2Desafio03.ms2Desafio03.service;
 
 import com.ms2Desafio03.ms2Desafio03.client.OpenFeignMs1;
 import com.ms2Desafio03.ms2Desafio03.entity.Event;
+import com.ms2Desafio03.ms2Desafio03.entity.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
@@ -10,6 +11,8 @@ import com.ms2Desafio03.ms2Desafio03.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class TicketServices {
@@ -45,6 +48,27 @@ public class TicketServices {
         return ticketRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Id não encontrado")
         );
+    }
+
+    @Transactional
+    public HasTickets hasTickets(String eventId){
+        Event event = openFeignMs1.getById(eventId);
+
+        List<Ticket> tickets = ticketRepository.findAll();
+
+        HasTickets hasTickets = new HasTickets();
+
+        tickets.forEach(t -> {
+            if(t.getEvent().getId().equals(event.getId())){
+                hasTickets.setId(event.getId());
+                hasTickets.setHasTickets(true);
+            }else {
+                hasTickets.setId(event.getId());
+                hasTickets.setHasTickets(false);
+            }
+        });
+
+        return hasTickets;
     }
 
     @Transactional

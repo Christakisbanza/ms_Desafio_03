@@ -1,5 +1,6 @@
 package com.ms2Desafio03.ms2Desafio03.controller;
 
+import com.ms2Desafio03.ms2Desafio03.entity.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
@@ -27,6 +28,12 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> getById(@PathVariable String id){
         Ticket ticket = ticketServices.getById(id);
         return ResponseEntity.ok().body(TicketMapper.toDto(ticket));
+    }
+
+    @GetMapping("/check-tickets-by-event/{eventId}")
+    public ResponseEntity<HasTickets> hasTickets(@PathVariable String eventId ){
+        HasTickets hasTickets = ticketServices.hasTickets(eventId);
+        return ResponseEntity.ok().body(hasTickets);
     }
 
     @PutMapping("/update-ticket/{id}")
