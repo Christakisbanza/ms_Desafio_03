@@ -64,4 +64,9 @@ public class TicketServices {
 
         return ticketToUpdate;
     }
+
+    @Transactional
+    public void deleteById(String id){
+        ticketRepository.deleteById(id);
+    }
 }
