@@ -46,4 +46,22 @@ public class TicketServices {
                 () -> new RuntimeException("Id não encontrado")
         );
     }
+
+    @Transactional
+    public Ticket upDateById(String id, TicketCreatDto ticketCreatDto){
+        Ticket ticketToUpdate = getById(id);
+        Event event = openFeignMs1.getById(ticketCreatDto.getEventId());
+
+        ticketToUpdate.setCustomerName(ticketCreatDto.getCustomerName());
+        ticketToUpdate.setCustomerMail(ticketCreatDto.getCustomerMail());
+        ticketToUpdate.setCpf(ticketCreatDto.getCpf());
+        ticketToUpdate.setEvent(event);
+        ticketToUpdate.setBrlTotalAmount(ticketCreatDto.getBrlTotalAmount());
+        ticketToUpdate.setUsdTotalAmount(ticketCreatDto.getUsdTotalAmount());
+        ticketToUpdate.setStatus("concluído");
+
+        ticketRepository.save(ticketToUpdate);
+
+        return ticketToUpdate;
+    }
 }
