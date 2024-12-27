@@ -39,4 +39,11 @@ public class TicketServices {
 
         return TicketMapper.toTicket(ticketResponseDto);
     }
+
+    @Transactional
+    public Ticket getById(String id){
+        return ticketRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Id não encontrado")
+        );
+    }
 }
