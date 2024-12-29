@@ -1,7 +1,9 @@
 package com.ms1Desafio03.ms1Desafio03.service;
 
 import com.ms1Desafio03.ms1Desafio03.client.OpenFeignCep;
+import com.ms1Desafio03.ms1Desafio03.client.OpenFeignMs2;
 import com.ms1Desafio03.ms1Desafio03.entity.Event;
+import com.ms1Desafio03.ms1Desafio03.entity.HasTickets;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
 import com.ms1Desafio03.ms1Desafio03.mapper.EventMapper;
 import com.ms1Desafio03.ms1Desafio03.repository.EventRepository;
@@ -19,6 +21,9 @@ public class EventService {
 
     @Autowired
     private OpenFeignCep openFeignCep;
+
+    @Autowired
+    private OpenFeignMs2 openFeignMs2;
 
 
 
@@ -76,7 +81,14 @@ public class EventService {
 
     @Transactional
     public void deleteById(String id){
-        eventRepository.deleteById(id);
+        HasTickets hasTickets = openFeignMs2.hasTickets(id);
+
+        if (hasTickets.isHasTickets()){
+            throw new RuntimeException("O evento não pode ser deletado porque possui ingressos vendidos.");
+        }
+        else {
+            eventRepository.deleteById(id);
+        }
     }
 
 
