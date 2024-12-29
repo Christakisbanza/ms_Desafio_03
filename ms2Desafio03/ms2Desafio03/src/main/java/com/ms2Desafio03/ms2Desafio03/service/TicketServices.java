@@ -24,21 +24,22 @@ public class TicketServices {
     private OpenFeignMs1 openFeignMs1;
 
     @Transactional
-    public Ticket save(TicketCreatDto ticketCreatDto){
-        Event event = openFeignMs1.getById(ticketCreatDto.getEventId());
+    public Ticket save(Ticket ticket){
+        Event event = openFeignMs1.getById(ticket.getEvent().getId());
 
         TicketResponseDto ticketResponseDto = new TicketResponseDto();
 
-        ticketResponseDto.setId(new Ticket().getId());
-        ticketResponseDto.setCpf(ticketCreatDto.getCpf());
-        ticketResponseDto.setCustomerName(ticketCreatDto.getCustomerName());
-        ticketResponseDto.setCustomerMail(ticketCreatDto.getCustomerMail());
+        ticketResponseDto.setCpf(ticket.getCpf());
+        ticketResponseDto.setCustomerName(ticket.getCustomerName());
+        ticketResponseDto.setCustomerMail(ticket.getCustomerMail());
         ticketResponseDto.setEvent(event);
-        ticketResponseDto.setBrlTotalAmount(ticketCreatDto.getBrlTotalAmount());
-        ticketResponseDto.setUsdTotalAmount(ticketCreatDto.getUsdTotalAmount());
+        ticketResponseDto.setBrlTotalAmount(ticket.getBrlTotalAmount());
+        ticketResponseDto.setUsdTotalAmount(ticket.getUsdTotalAmount());
         ticketResponseDto.setStatus("concluído");
 
-        ticketRepository.save(TicketMapper.toTicket(ticketResponseDto));
+        Ticket ticketSaved = ticketRepository.save(TicketMapper.toTicket(ticketResponseDto));
+
+        ticketResponseDto.setId(ticketSaved.getId());
 
         return TicketMapper.toTicket(ticketResponseDto);
     }

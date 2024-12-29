@@ -20,7 +20,7 @@ public class TicketController {
 
     @PostMapping("/create-ticket")
     public ResponseEntity<TicketResponseDto> save(@RequestBody TicketCreatDto ticketCreatDto){
-        Ticket ticket = ticketServices.save(ticketCreatDto);
+        Ticket ticket = ticketServices.save(TicketMapper.toTicket(ticketCreatDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(TicketMapper.toDto(ticket));
     }
 
