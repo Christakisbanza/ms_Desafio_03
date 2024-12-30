@@ -6,6 +6,9 @@ import com.ms2Desafio03.ms2Desafio03.entity.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
+import com.ms2Desafio03.ms2Desafio03.exception.DataInvalidException;
+import com.ms2Desafio03.ms2Desafio03.exception.EntityNotFoundException;
+import com.ms2Desafio03.ms2Desafio03.exception.TicketNotFoundException;
 import com.ms2Desafio03.ms2Desafio03.mapper.TicketMapper;
 import com.ms2Desafio03.ms2Desafio03.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,73 +28,101 @@ public class TicketServices {
 
     @Transactional
     public Ticket save(Ticket ticket){
-        Event event = openFeignMs1.getById(ticket.getEvent().getId());
+        try {
+            Event event = openFeignMs1.getById(ticket.getEvent().getId());
 
-        TicketResponseDto ticketResponseDto = new TicketResponseDto();
+            TicketResponseDto ticketResponseDto = new TicketResponseDto();
 
-        ticketResponseDto.setCpf(ticket.getCpf());
-        ticketResponseDto.setCustomerName(ticket.getCustomerName());
-        ticketResponseDto.setCustomerMail(ticket.getCustomerMail());
-        ticketResponseDto.setEvent(event);
-        ticketResponseDto.setBrlTotalAmount(ticket.getBrlTotalAmount());
-        ticketResponseDto.setUsdTotalAmount(ticket.getUsdTotalAmount());
-        ticketResponseDto.setStatus("concluído");
+            if(!ticket.getEvent().getEventName().equals(event.getEventName())){
+                throw new RuntimeException();
+            }
 
-        Ticket ticketSaved = ticketRepository.save(TicketMapper.toTicket(ticketResponseDto));
+            ticketResponseDto.setCpf(ticket.getCpf());
+            ticketResponseDto.setCustomerName(ticket.getCustomerName());
+            ticketResponseDto.setCustomerMail(ticket.getCustomerMail());
+            ticketResponseDto.setEvent(event);
+            ticketResponseDto.setBrlTotalAmount(ticket.getBrlTotalAmount());
+            ticketResponseDto.setUsdTotalAmount(ticket.getUsdTotalAmount());
+            ticketResponseDto.setStatus("concluído");
 
-        ticketResponseDto.setId(ticketSaved.getId());
+            Ticket ticketSaved = ticketRepository.save(TicketMapper.toTicket(ticketResponseDto));
 
-        return TicketMapper.toTicket(ticketResponseDto);
+            ticketResponseDto.setId(ticketSaved.getId());
+
+            return TicketMapper.toTicket(ticketResponseDto);
+        }
+        catch (RuntimeException e){
+            throw new DataInvalidException("argumentNotValid: event name or event id invalid");
+        }
     }
 
     @Transactional
     public Ticket getById(String id){
         return ticketRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Id não encontrado")
+                () -> new TicketNotFoundException("Id não encontrado")
         );
     }
 
     @Transactional
     public HasTickets hasTickets(String eventId){
-        Event event = openFeignMs1.getById(eventId);
+        try {
+            Event event = openFeignMs1.getById(eventId);
 
-        List<Ticket> tickets = ticketRepository.findAll();
+            List<Ticket> tickets = ticketRepository.findAll();
 
-        HasTickets hasTickets = new HasTickets();
+            HasTickets hasTickets = new HasTickets();
 
-        tickets.forEach(t -> {
-            if(t.getEvent().getId().equals(event.getId())){
-                hasTickets.setId(event.getId());
-                hasTickets.setHasTickets(true);
-            }else {
-                hasTickets.setId(event.getId());
-                hasTickets.setHasTickets(false);
-            }
-        });
+            tickets.forEach(t -> {
+                if (t.getEvent().getId().equals(event.getId())) {
+                    hasTickets.setId(event.getId());
+                    hasTickets.setHasTickets(true);
+                } else {
+                    hasTickets.setId(event.getId());
+                    hasTickets.setHasTickets(false);
+                }
+            });
 
-        return hasTickets;
+            return hasTickets;
+        }
+        catch (RuntimeException e){
+            throw new EntityNotFoundException("id invalid");
+        }
     }
 
     @Transactional
     public Ticket upDateById(String id, TicketCreatDto ticketCreatDto){
-        Ticket ticketToUpdate = getById(id);
-        Event event = openFeignMs1.getById(ticketCreatDto.getEventId());
+        try {
+            Ticket ticketToUpdate = getById(id);
+            Event event = openFeignMs1.getById(ticketCreatDto.getEventId());
 
-        ticketToUpdate.setCustomerName(ticketCreatDto.getCustomerName());
-        ticketToUpdate.setCustomerMail(ticketCreatDto.getCustomerMail());
-        ticketToUpdate.setCpf(ticketCreatDto.getCpf());
-        ticketToUpdate.setEvent(event);
-        ticketToUpdate.setBrlTotalAmount(ticketCreatDto.getBrlTotalAmount());
-        ticketToUpdate.setUsdTotalAmount(ticketCreatDto.getUsdTotalAmount());
-        ticketToUpdate.setStatus("concluído");
+            if(!ticketCreatDto.getEventName().equals(event.getEventName())){
+                throw new RuntimeException();
+            }
 
-        ticketRepository.save(ticketToUpdate);
+            ticketToUpdate.setCustomerName(ticketCreatDto.getCustomerName());
+            ticketToUpdate.setCustomerMail(ticketCreatDto.getCustomerMail());
+            ticketToUpdate.setCpf(ticketCreatDto.getCpf());
+            ticketToUpdate.setEvent(event);
+            ticketToUpdate.setBrlTotalAmount(ticketCreatDto.getBrlTotalAmount());
+            ticketToUpdate.setUsdTotalAmount(ticketCreatDto.getUsdTotalAmount());
+            ticketToUpdate.setStatus("concluído");
 
-        return ticketToUpdate;
+            ticketRepository.save(ticketToUpdate);
+
+            return ticketToUpdate;
+        }
+        catch (RuntimeException e){
+            throw new DataInvalidException("argumentNotValid: event name or event ids invalid");
+        }
     }
 
     @Transactional
     public void deleteById(String id){
-        ticketRepository.deleteById(id);
+        try {
+            ticketRepository.deleteById(id);
+        }
+        catch (RuntimeException e){
+            throw new TicketNotFoundException("Id not found or invalid");
+        }
     }
 }
