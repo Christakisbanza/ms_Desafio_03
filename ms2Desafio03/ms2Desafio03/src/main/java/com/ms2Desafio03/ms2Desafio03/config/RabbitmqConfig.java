@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitmqConfig {
 
     public static final String EXCHANGE_NAME = "exchange_email";
-    public static final String KEY = "routing.key.email";
+    public static final String KEY = "ms.email";
 
     @Value("${spring.rabbitmq.queue}")
     private String queue;
