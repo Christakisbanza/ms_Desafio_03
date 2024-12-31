@@ -5,7 +5,7 @@ import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
 import com.ms2Desafio03.ms2Desafio03.mapper.TicketMapper;
-import com.ms2Desafio03.ms2Desafio03.msgEmail.MsgEmailProducer;
+import com.ms2Desafio03.ms2Desafio03.producer.MsgEmailProducer;
 import com.ms2Desafio03.ms2Desafio03.service.TicketServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

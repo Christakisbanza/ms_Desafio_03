@@ -1,4 +1,4 @@
-package com.ms2Desafio03.ms2Desafio03.msgEmail;
+package com.ms2Desafio03.ms2Desafio03.producer;
 
 import com.ms2Desafio03.ms2Desafio03.config.RabbitmqConfig;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
