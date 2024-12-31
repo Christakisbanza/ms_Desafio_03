@@ -1,7 +1,6 @@
 package com.ms2Desafio03.ms2Desafio03.client;
 
-import com.ms2Desafio03.ms2Desafio03.entity.Event;
-import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
+import com.ms2Desafio03.ms2Desafio03.entity.model.Event;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

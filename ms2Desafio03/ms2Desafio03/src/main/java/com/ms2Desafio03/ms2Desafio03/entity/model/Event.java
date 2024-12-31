@@ -1,4 +1,4 @@
-package com.ms2Desafio03.ms2Desafio03.entity;
+package com.ms2Desafio03.ms2Desafio03.entity.model;
 
 public class Event {
 

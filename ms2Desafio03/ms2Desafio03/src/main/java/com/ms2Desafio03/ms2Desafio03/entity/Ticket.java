@@ -1,5 +1,6 @@
 package com.ms2Desafio03.ms2Desafio03.entity;
 
+import com.ms2Desafio03.ms2Desafio03.entity.model.Event;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

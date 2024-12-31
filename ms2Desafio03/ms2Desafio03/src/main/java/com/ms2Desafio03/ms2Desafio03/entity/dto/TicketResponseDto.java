@@ -1,6 +1,6 @@
 package com.ms2Desafio03.ms2Desafio03.entity.dto;
 
-import com.ms2Desafio03.ms2Desafio03.entity.Event;
+import com.ms2Desafio03.ms2Desafio03.entity.model.Event;
 
 public class TicketResponseDto {
 

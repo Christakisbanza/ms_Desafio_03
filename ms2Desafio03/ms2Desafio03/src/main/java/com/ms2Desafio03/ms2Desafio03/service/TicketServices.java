@@ -1,8 +1,8 @@
 package com.ms2Desafio03.ms2Desafio03.service;
 
 import com.ms2Desafio03.ms2Desafio03.client.OpenFeignMs1;
-import com.ms2Desafio03.ms2Desafio03.entity.Event;
-import com.ms2Desafio03.ms2Desafio03.entity.HasTickets;
+import com.ms2Desafio03.ms2Desafio03.entity.model.Event;
+import com.ms2Desafio03.ms2Desafio03.entity.model.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
