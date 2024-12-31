@@ -12,7 +12,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitmqConfig {
 
-    public static final String EXCHANGE_NAME = "exchange_objeto";
+    public static final String EXCHANGE_NAME = "exchange_email";
+    public static final String KEY = "routing.key.email";
 
     @Value("${spring.rabbitmq.queue}")
     private String queue;
@@ -34,6 +35,6 @@ public class RabbitmqConfig {
 
     @Bean
     public Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("routing.key.objeto");
+        return BindingBuilder.bind(queue).to(exchange).with(KEY);
     }
 }

@@ -22,7 +22,7 @@ public class MsgEmailProducer {
         emailMsg.setSubject("Compra de ingreço para o show");
         emailMsg.setText("Sua compra foi efetuado com sucesso, obrigado e volte sempre !");
         emailMsg.setStatus("Enviado com sucesso !");
-        rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE_NAME, "routing.key.objeto", emailMsg);
+        rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE_NAME, RabbitmqConfig.KEY, emailMsg);
         System.out.println(emailMsg.getStatus());
     }
 }
