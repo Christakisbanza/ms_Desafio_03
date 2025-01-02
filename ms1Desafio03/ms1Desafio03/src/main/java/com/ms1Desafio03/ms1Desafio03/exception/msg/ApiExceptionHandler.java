@@ -27,11 +27,11 @@ public class ApiExceptionHandler {
 
 
     @ExceptionHandler(ArgsNotValidException.class)
-    public ResponseEntity<ErrorMessage> argumentNotValid(HttpServletRequest request, BindingResult result){
+    public ResponseEntity<ErrorMessage> argumentNotValid(ArgsNotValidException ex, HttpServletRequest request){
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Invalid Fields", result));
+                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()));
 
     }
 
