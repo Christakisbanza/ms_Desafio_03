@@ -6,6 +6,7 @@ import com.ms1Desafio03.ms1Desafio03.entity.Event;
 import com.ms1Desafio03.ms1Desafio03.entity.HasTickets;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
 import com.ms1Desafio03.ms1Desafio03.exception.ArgsNotValidException;
+import com.ms1Desafio03.ms1Desafio03.exception.DeleteException;
 import com.ms1Desafio03.ms1Desafio03.exception.EntityNotFoundException;
 import com.ms1Desafio03.ms1Desafio03.exception.EventNotFoundException;
 import com.ms1Desafio03.ms1Desafio03.mapper.EventMapper;
@@ -105,7 +106,7 @@ public class EventService {
             }
         }
         catch (RuntimeException e){
-            throw new EntityNotFoundException("O evento não pode ser deletado porque possui ingressos vendidos ou ID inválido");
+            throw new DeleteException("O evento não pode ser deletado porque possui ingressos vendidos ou ID inválido");
         }
     }
 

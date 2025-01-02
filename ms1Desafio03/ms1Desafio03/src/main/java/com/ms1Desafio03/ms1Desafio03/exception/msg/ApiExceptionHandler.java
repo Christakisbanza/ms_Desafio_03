@@ -2,6 +2,7 @@ package com.ms1Desafio03.ms1Desafio03.exception.msg;
 
 
 import com.ms1Desafio03.ms1Desafio03.exception.ArgsNotValidException;
+import com.ms1Desafio03.ms1Desafio03.exception.DeleteException;
 import com.ms1Desafio03.ms1Desafio03.exception.EntityNotFoundException;
 import com.ms1Desafio03.ms1Desafio03.exception.EventNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +42,15 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
+
+    }
+
+    @ExceptionHandler(DeleteException.class)
+    public ResponseEntity<ErrorMessage> deleteException(DeleteException ex, HttpServletRequest request){
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
 
     }
 }
