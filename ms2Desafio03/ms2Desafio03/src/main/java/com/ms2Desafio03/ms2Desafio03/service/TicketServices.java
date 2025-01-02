@@ -112,7 +112,7 @@ public class TicketServices {
             return ticketToUpdate;
         }
         catch (RuntimeException e){
-            throw new DataInvalidException("argumentNotValid: event name or event ids invalid");
+            throw new EntityNotFoundException("argumentNotValid: event name or event ids invalid");
         }
     }
 
