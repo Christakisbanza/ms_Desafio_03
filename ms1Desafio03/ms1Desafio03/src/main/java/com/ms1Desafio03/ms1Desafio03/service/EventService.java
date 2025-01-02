@@ -5,6 +5,7 @@ import com.ms1Desafio03.ms1Desafio03.client.OpenFeignMs2;
 import com.ms1Desafio03.ms1Desafio03.entity.Event;
 import com.ms1Desafio03.ms1Desafio03.entity.HasTickets;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
+import com.ms1Desafio03.ms1Desafio03.exception.ArgsNotValidException;
 import com.ms1Desafio03.ms1Desafio03.exception.EntityNotFoundException;
 import com.ms1Desafio03.ms1Desafio03.exception.EventNotFoundException;
 import com.ms1Desafio03.ms1Desafio03.mapper.EventMapper;
@@ -46,7 +47,7 @@ public class EventService {
             return EventMapper.toEvent(responseDto);
         }
         catch (RuntimeException e){
-            throw new EntityNotFoundException("CEP not found or invalid");
+            throw new ArgsNotValidException("CEP not found or invalid");
         }
     }
 

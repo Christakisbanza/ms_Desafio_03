@@ -1,6 +1,7 @@
 package com.ms1Desafio03.ms1Desafio03.exception.msg;
 
 
+import com.ms1Desafio03.ms1Desafio03.exception.ArgsNotValidException;
 import com.ms1Desafio03.ms1Desafio03.exception.EntityNotFoundException;
 import com.ms1Desafio03.ms1Desafio03.exception.EventNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,8 +26,8 @@ public class ApiExceptionHandler {
     }
 
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorMessage> argumentNotValid(MethodArgumentNotValidException ex, HttpServletRequest request, BindingResult result){
+    @ExceptionHandler(ArgsNotValidException.class)
+    public ResponseEntity<ErrorMessage> argumentNotValid(HttpServletRequest request, BindingResult result){
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
