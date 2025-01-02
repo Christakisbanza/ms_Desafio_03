@@ -27,7 +27,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(DataInvalidException.class)
     public ResponseEntity<ErrorMessage> argumentNotValid(DataInvalidException ex, HttpServletRequest request){
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()));
 

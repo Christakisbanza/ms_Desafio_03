@@ -139,8 +139,8 @@ public class EventController {
                             description = "Event successfully deleted"
                     ),
                     @ApiResponse(
-                            responseCode = "404",
-                            description = "Event not found",
+                            responseCode = "409",
+                            description = "Conflito",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
                     )
             }
