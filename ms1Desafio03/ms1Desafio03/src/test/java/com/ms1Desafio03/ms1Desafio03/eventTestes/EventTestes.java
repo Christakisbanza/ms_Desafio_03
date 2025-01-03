@@ -114,7 +114,7 @@ public class EventTestes {
     public void updateEvent_ifEventDataValid_ReturnEventUpdatedWithStatus200(){
         EventResponseDto eventResponseDto = testClient
                 .put()
-                .uri("events/v1/update-event/6776e7d78510391d10239073")
+                .uri("events/v1/update-event/6776ffe33329b9190bef187d")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(new EventCreateDto("TestNameUpdate", "2026/01/10 10:30", "80060050"))
                 .exchange()

@@ -1,16 +1,36 @@
 package com.ms2Desafio03.ms2Desafio03.entity.dto;
 
-public class TicketCreatDto {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
+public class TicketCreateDto {
+
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String customerName;
+
+    @NotBlank
+    @Size(min = 11, max = 11)
     private String cpf;
+
+    @NotBlank
+    @Email
     private String customerMail;
+
+    @NotBlank
     private String eventId;
+
+    @NotBlank
     private String eventName;
+
+    @NotBlank
     private String brlTotalAmount;
+
+    @NotBlank
     private String usdTotalAmount;
 
-    public TicketCreatDto(String customerName, String cpf, String customerMail, String eventId, String eventName, String brlTotalAmount, String usdTotalAmount) {
+    public TicketCreateDto(String customerName, String cpf, String customerMail, String eventId, String eventName, String brlTotalAmount, String usdTotalAmount) {
         this.customerName = customerName;
         this.cpf = cpf;
         this.customerMail = customerMail;
@@ -20,7 +40,7 @@ public class TicketCreatDto {
         this.usdTotalAmount = usdTotalAmount;
     }
 
-    public TicketCreatDto() {
+    public TicketCreateDto() {
     }
 
     public String getCustomerName() {

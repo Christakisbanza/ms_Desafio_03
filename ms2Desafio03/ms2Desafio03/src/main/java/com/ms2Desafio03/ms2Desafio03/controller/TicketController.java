@@ -2,7 +2,7 @@ package com.ms2Desafio03.ms2Desafio03.controller;
 
 import com.ms2Desafio03.ms2Desafio03.entity.model.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
-import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
+import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreateDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
 import com.ms2Desafio03.ms2Desafio03.exception.msg.ErrorMessage;
 import com.ms2Desafio03.ms2Desafio03.mapper.TicketMapper;
@@ -45,7 +45,7 @@ public class TicketController {
             }
     )
     @PostMapping("/create-ticket")
-    public ResponseEntity<TicketResponseDto> save(@RequestBody TicketCreatDto ticketCreatDto){
+    public ResponseEntity<TicketResponseDto> save(@RequestBody TicketCreateDto ticketCreatDto){
         Ticket ticket = ticketServices.save(TicketMapper.toTicket(ticketCreatDto));
         msgEmailProducer.sendEmailMsg(ticket);
         return ResponseEntity.status(HttpStatus.CREATED).body(TicketMapper.toDto(ticket));
@@ -115,7 +115,7 @@ public class TicketController {
             }
     )
     @PutMapping("/update-ticket/{id}")
-    public ResponseEntity<TicketResponseDto> upDateById(@PathVariable String id, @RequestBody TicketCreatDto ticketCreatDto){
+    public ResponseEntity<TicketResponseDto> upDateById(@PathVariable String id, @RequestBody TicketCreateDto ticketCreatDto){
         Ticket ticket = ticketServices.upDateById(id, ticketCreatDto);
         return ResponseEntity.ok().body(TicketMapper.toDto(ticket));
     }

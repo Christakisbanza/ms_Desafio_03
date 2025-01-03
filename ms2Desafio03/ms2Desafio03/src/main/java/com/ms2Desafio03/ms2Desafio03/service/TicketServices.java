@@ -4,7 +4,7 @@ import com.ms2Desafio03.ms2Desafio03.client.OpenFeignMs1;
 import com.ms2Desafio03.ms2Desafio03.entity.model.Event;
 import com.ms2Desafio03.ms2Desafio03.entity.model.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.entity.Ticket;
-import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
+import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreateDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
 import com.ms2Desafio03.ms2Desafio03.exception.DataInvalidException;
 import com.ms2Desafio03.ms2Desafio03.exception.EntityNotFoundException;
@@ -90,7 +90,7 @@ public class TicketServices {
     }
 
     @Transactional
-    public Ticket upDateById(String id, TicketCreatDto ticketCreatDto){
+    public Ticket upDateById(String id, TicketCreateDto ticketCreatDto){
         try {
             Ticket ticketToUpdate = getById(id);
             Event event = openFeignMs1.getById(ticketCreatDto.getEventId());

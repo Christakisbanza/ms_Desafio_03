@@ -1,9 +1,18 @@
 package com.ms1Desafio03.ms1Desafio03.entity.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class EventCreateDto {
 
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String eventName;
+
+    @NotBlank
     private String dateTime;
+
+    @NotBlank
     private String cep;
 
     public EventCreateDto(String eventName, String dateTime, String cep) {

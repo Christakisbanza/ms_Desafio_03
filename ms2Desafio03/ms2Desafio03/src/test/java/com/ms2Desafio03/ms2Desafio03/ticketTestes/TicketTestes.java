@@ -1,6 +1,6 @@
 package com.ms2Desafio03.ms2Desafio03.ticketTestes;
 
-import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreatDto;
+import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketCreateDto;
 import com.ms2Desafio03.ms2Desafio03.entity.dto.TicketResponseDto;
 import com.ms2Desafio03.ms2Desafio03.entity.model.HasTickets;
 import com.ms2Desafio03.ms2Desafio03.exception.msg.ErrorMessage;
@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
-import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TicketTestes {
@@ -25,7 +23,7 @@ public class TicketTestes {
                 .post()
                 .uri("tickets/v1/create-ticket")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("TestNameTicket", "45120321456", "TestNameTicket@gmail.com", "6776deec36c0ee22bd9e6397","B","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("TestNameTicket", "45120321456", "TestNameTicket@gmail.com", "6776deec36c0ee22bd9e6397","B","R$50","R$10"))
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(TicketResponseDto.class)
@@ -43,7 +41,7 @@ public class TicketTestes {
                 .post()
                 .uri("tickets/v1/create-ticket")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("TestNameTicket", "45120321456", "TestNameTicket@gmail.com", "6776deec36c0ee22bd9e6397","test","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("TestNameTicket", "45120321456", "TestNameTicket@gmail.com", "6776deec36c0ee22bd9e6397","test","R$50","R$10"))
                 .exchange()
                 .expectStatus().isEqualTo(422)
                 .expectBody(ErrorMessage.class)
@@ -56,7 +54,7 @@ public class TicketTestes {
                 .post()
                 .uri("tickets/v1/create-ticket")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("TestNameTicket", "45120321456", "TestNameTicket@gmail.com", "2","B","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("TestNameTicket", "45120321456", "TestNameTicket@gmail.com", "2","B","R$50","R$10"))
                 .exchange()
                 .expectStatus().isEqualTo(422)
                 .expectBody(ErrorMessage.class)
@@ -128,7 +126,7 @@ public class TicketTestes {
                 .put()
                 .uri("tickets/v1/update-ticket/6771e1158e736f7124b65a0c")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("Update", "12345678911", "update@gmail.com", "6776deec36c0ee22bd9e6397","B","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("Update", "12345678911", "update@gmail.com", "6776deec36c0ee22bd9e6397","B","R$50","R$10"))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(TicketResponseDto.class)
@@ -146,7 +144,7 @@ public class TicketTestes {
                 .put()
                 .uri("tickets/v1/update-ticket/6776e7d78510391d10239073")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("Update", "12345678911", "update@gmail.com", "6776deec36c0ee22bd9e6397","B","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("Update", "12345678911", "update@gmail.com", "6776deec36c0ee22bd9e6397","B","R$50","R$10"))
                 .exchange()
                 .expectStatus().isEqualTo(404)
                 .expectBody(ErrorMessage.class)
@@ -159,7 +157,7 @@ public class TicketTestes {
                 .put()
                 .uri("tickets/v1/update-ticket/6771e1158e736f7124b65a0c")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("Update", "12345678911", "update@gmail.com", "5","B","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("Update", "12345678911", "update@gmail.com", "5","B","R$50","R$10"))
                 .exchange()
                 .expectStatus().isEqualTo(404)
                 .expectBody(ErrorMessage.class)
@@ -172,7 +170,7 @@ public class TicketTestes {
                 .put()
                 .uri("tickets/v1/update-ticket/6771e1158e736f7124b65a0c")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new TicketCreatDto("Update", "12345678911", "update@gmail.com", "6776deec36c0ee22bd9e6397","Z","R$50","R$10"))
+                .bodyValue(new TicketCreateDto("Update", "12345678911", "update@gmail.com", "6776deec36c0ee22bd9e6397","Z","R$50","R$10"))
                 .exchange()
                 .expectStatus().isEqualTo(404)
                 .expectBody(ErrorMessage.class)
