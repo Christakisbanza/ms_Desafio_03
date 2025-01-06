@@ -1,6 +1,5 @@
 package com.ms1Desafio03.ms1Desafio03.eventTestes;
 
-import com.ms1Desafio03.ms1Desafio03.entity.Event;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventCreateDto;
 import com.ms1Desafio03.ms1Desafio03.entity.dto.EventResponseDto;
 import com.ms1Desafio03.ms1Desafio03.exception.msg.ErrorMessage;
@@ -8,14 +7,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class EventTestes {
+public class EventTests {
 
     @Autowired
     WebTestClient testClient;

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "consultaMs2", url = "http://localhost:8081/tickets/v1")
+@FeignClient(name = "consultaMs2", url = "http://ms2-container:8081/tickets/v1")
 public interface OpenFeignMs2 {
 
     @GetMapping("/check-tickets-by-event/{eventId}")
