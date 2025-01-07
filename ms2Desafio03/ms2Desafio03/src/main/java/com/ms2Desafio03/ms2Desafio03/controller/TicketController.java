@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("tickets/v1")
 public class TicketController {
@@ -72,6 +74,28 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> getById(@PathVariable String id){
         Ticket ticket = ticketServices.getById(id);
         return ResponseEntity.ok().body(TicketMapper.toDto(ticket));
+    }
+
+    @Operation(
+            summary = "Get all Ticket",
+            description = "Endpoint to get all Ticket",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Tickets successfully retrieved",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketResponseDto.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Tickets not found",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
+                    )
+            }
+    )
+    @GetMapping("/get-all-tickets")
+    public ResponseEntity<List<TicketResponseDto>> getAll(){
+        List<Ticket> list = ticketServices.getAll();
+        return ResponseEntity.ok().body(TicketMapper.toDtos(list));
     }
 
 

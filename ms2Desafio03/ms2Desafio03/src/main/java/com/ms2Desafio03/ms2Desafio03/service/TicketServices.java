@@ -64,6 +64,11 @@ public class TicketServices {
     }
 
     @Transactional
+    public List<Ticket> getAll(){
+        return ticketRepository.findAll();
+    }
+
+    @Transactional
     public HasTickets hasTickets(String eventId){
         try {
             Event event = openFeignMs1.getById(eventId);
