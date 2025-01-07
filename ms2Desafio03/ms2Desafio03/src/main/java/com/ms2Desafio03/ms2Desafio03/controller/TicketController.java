@@ -31,7 +31,7 @@ public class TicketController {
 
 
     @Operation(
-            summary = "Create a new Ticket for a Even",
+            summary = "Create a new Ticket for a Event",
             description = "Endpoint to create a new Ticket for a Event",
             responses = {
                     @ApiResponse(
